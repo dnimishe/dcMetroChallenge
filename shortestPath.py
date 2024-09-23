@@ -4,7 +4,7 @@
 # source shortest path algorithm. The program is
 # for adjacency matrix representation of the graph
 
-import getGraphFromExcel
+from getGraphFromExcel import ExcelFinder
 import pandas as pd
 
 
@@ -50,7 +50,6 @@ class Graph():
             # Pick the minimum distance vertex from
             # the set of vertices not yet processed.
             # u is always equal to src in first iteration
-            print(cout)
             u = self.minDistance(dist, sptSet)
 
             # Put the minimum distance vertex in the
@@ -69,29 +68,24 @@ class Graph():
 
         # self.printSolution(dist)
         return dist
-    
-def exportToExcel(matrix):
-    df = pd.DataFrame(matrix)
-    df.to_excel(excel_writer="Distance matrix.xlsx", sheet_name="Distance matrix")
-
 
 
 # Driver program
 # Driver Code 
 if __name__ == "__main__": 
     V = 98
-    graph = getGraphFromExcel.main()
-    refinedMatrix = [i[1:] for i in graph]
-    allStations = [i[0] for i in graph]
+    e = ExcelFinder()
+    adjacencyMatrix = e.getAdjacencyMatrix()
+    allStations = e.getStationNames()
     g = Graph(V)
-    g.graph = refinedMatrix
+    g.graph = adjacencyMatrix
 
     distanceMatrix = []
     i = 0
     while i < V:
         distanceMatrix.append(g.dijkstra(i))
         i = i + 1
-    exportToExcel(distanceMatrix)
+    e.exportDistanceMatrix(distanceMatrix)
 
 
 # This code is contributed by Divyanshu Mehta

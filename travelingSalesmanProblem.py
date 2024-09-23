@@ -1,7 +1,7 @@
 # Python3 program to implement traveling salesman 
 # problem using naive approach. 
 
-import getGraphFromExcel
+from getGraphFromExcel import ExcelFinder
 
 from sys import maxsize 
 from itertools import permutations
@@ -20,7 +20,6 @@ def travellingSalesmanProblem(graph, s):
 	min_path = maxsize 
 	next_permutation=permutations(vertex)
 	for i in next_permutation:
-
 		# store current Path weight(cost) 
 		current_pathweight = 0
 
@@ -41,8 +40,9 @@ def travellingSalesmanProblem(graph, s):
 if __name__ == "__main__": 
 
 	# matrix representation of graph 
-	graph = getGraphFromExcel.main()
-	distanceMatrix = [i[1:] for i in graph]
-	allStations = [i[0] for i in graph]
+	e = ExcelFinder()
+	distanceMatrix = e.getDistanceMatrix()
+	allStations = e.getStationNames()
 	s = 0
+	print(distanceMatrix)
 	print(travellingSalesmanProblem(distanceMatrix, s))

@@ -1,15 +1,26 @@
 import pandas as pd
 
-def main():
-    df = pd.read_excel("Distance matrix.xlsx", sheet_name="Distance matrix")
-    matrix_as_list = df.values.tolist()
-    # remove the first element from each array, aka the name of the station
-    refinedMatrix = [i[1:] for i in matrix_as_list]
-    print(refinedMatrix[0])
-    return refinedMatrix
 
-if __name__ == "__main__": 
-    # var = main()
-    # print(len(var))
-    # print(len(var[0]))
-    main()
+class ExcelFinder:
+
+    def __init__(self):
+        graphDf = pd.read_excel("Graph.xlsx", sheet_name="Refined matrix")
+        self.adjacency_matrix_as_list = graphDf.values.tolist()
+        distanceMatrixDf = pd.read_excel("Distance matrix.xlsx", sheet_name="Distance matrix")
+        self.distance_matrix_as_list = distanceMatrixDf.values.tolist()
+
+    def getAdjacencyMatrix(self):
+        refinedMatrix = [i[1:] for i in self.adjacency_matrix_as_list]
+        return refinedMatrix
+
+    def getStationNames(self):
+        stationNames = [i[0] for i in self.adjacency_matrix_as_list]
+        return stationNames
+    
+    def exportDistanceMatrix(self, matrix):
+        df = pd.DataFrame(matrix)
+        df.to_excel(excel_writer="Distance matrix.xlsx", sheet_name="Distance matrix")
+    
+    def getDistanceMatrix(self):
+        refinedMatrix = [i[1:] for i in self.distance_matrix_as_list]
+        return refinedMatrix
