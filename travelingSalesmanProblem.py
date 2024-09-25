@@ -32,6 +32,7 @@ def travellingSalesmanProblem(graph, s):
 
 		# update minimum 
 		min_path = min(min_path, current_pathweight)
+		print(min_path)
 		
 	return min_path 
 
@@ -39,10 +40,9 @@ def travellingSalesmanProblem(graph, s):
 # Driver Code 
 if __name__ == "__main__": 
 
-	# matrix representation of graph 
 	e = ExcelFinder()
 	distanceMatrix = e.getDistanceMatrix()
 	allStations = e.getStationNames()
-	s = 0
-	print(distanceMatrix)
-	print(travellingSalesmanProblem(distanceMatrix, s))
+	startingNode = 4
+	print(allStations[startingNode])
+	print(travellingSalesmanProblem(distanceMatrix, startingNode))

@@ -85,6 +85,9 @@ if __name__ == "__main__":
     while i < V:
         distanceMatrix.append(g.dijkstra(i))
         i = i + 1
+    print(distanceMatrix[0])
+    print(distanceMatrix[1])
+
     e.exportDistanceMatrix(distanceMatrix)
 
 
